@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="container" style="max-width: 420px;">
+        <h2 class="section-title">Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                {{ form.username.errors }}
+                <input type="text" name="username" class="form-control" required autofocus>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                {{ form.password.errors }}
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            {% if form.errors %}
+            <div class="alert alert-danger">Invalid username or password.</div>
+            {% endif %}
+            <button type="submit" class="btn btn-accent w-100">Login</button>
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
+</section>
+{% endblock %}

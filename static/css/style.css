@@ -1,0 +1,127 @@
+:root {
+    --accent: #6c5ce7;
+    --dark: #0f1020;
+    --dark-2: #16182b;
+}
+
+body {
+    background-color: #f7f7fb;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    color: #222;
+}
+
+.navbar {
+    background-color: var(--dark);
+}
+
+.navbar-brand, .nav-link {
+    color: #eee !important;
+}
+
+.nav-link:hover {
+    color: var(--accent) !important;
+}
+
+footer {
+    background-color: var(--dark);
+    color: #ccc;
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
+    color: #fff;
+    padding: 90px 0;
+}
+
+.hero img.profile-photo {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--accent);
+}
+
+.hero .tagline {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.btn-accent {
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+}
+
+.btn-accent:hover {
+    background-color: #5a4bd6;
+    color: #fff;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    transition: transform .2s ease, box-shadow .2s ease;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.card-img-top {
+    height: 190px;
+    object-fit: cover;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    background: #eee;
+}
+
+.section-title {
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+/* Skill progress bars */
+.skill-bar {
+    height: 10px;
+    border-radius: 6px;
+    background: #e6e6f0;
+    overflow: hidden;
+}
+
+.skill-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 6px;
+}
+
+.badge-tech {
+    background-color: #eee6ff;
+    color: var(--accent);
+    font-weight: 500;
+    margin: 2px;
+}
+
+section {
+    padding: 70px 0;
+}
+
+.dashboard-table th {
+    background-color: var(--dark);
+    color: #fff;
+}

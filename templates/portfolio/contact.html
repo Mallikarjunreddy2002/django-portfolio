@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="row">
+            <div class="col-md-7">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Subject</label>
+                        {{ form.subject }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        {{ form.message }}
+                    </div>
+                    <button type="submit" class="btn btn-accent">Send Message</button>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <h5>Contact Info</h5>
+                <ul class="list-unstyled">
+                    {% if site_profile.email %}<li><i class="bi bi-envelope"></i> {{ site_profile.email }}</li>{% endif %}
+                    {% if site_profile.phone %}<li><i class="bi bi-telephone"></i> {{ site_profile.phone }}</li>{% endif %}
+                    {% if site_profile.location %}<li><i class="bi bi-geo-alt"></i> {{ site_profile.location }}</li>{% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

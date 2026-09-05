@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="row g-4">
+            {% for skill in skills %}
+            <div class="col-md-6">
+                <div class="d-flex justify-content-between">
+                    <span>{% if skill.icon_class %}<i class="bi {{ skill.icon_class }} me-1"></i>{% endif %}{{ skill.name }}
+                        <small class="text-muted">({{ skill.get_category_display }})</small>
+                    </span>
+                    <span>{{ skill.proficiency }}%</span>
+                </div>
+                <div class="skill-bar mb-3">
+                    <div class="skill-bar-fill" style="width: {{ skill.proficiency }}%;"></div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">No skills added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

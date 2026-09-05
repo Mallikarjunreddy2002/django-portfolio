@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <h2 class="section-title">Confirm Delete</h2>
+        <p>Are you sure you want to delete the {{ type }} "<strong>{{ object }}</strong>"? This cannot be undone.</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Cancel</a>
+        </form>
+    </div>
+</section>
+{% endblock %}

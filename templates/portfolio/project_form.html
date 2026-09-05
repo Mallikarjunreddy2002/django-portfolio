@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <h2 class="section-title">{{ title }}</h2>
+        <form method="post" enctype="multipart/form-data" class="col-lg-8">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                {{ form.title }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Short Description</label>
+                {{ form.short_description }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Full Description</label>
+                {{ form.description }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                {{ form.image }}
+                {% if form.instance.image %}<div class="mt-2"><img src="{{ form.instance.image.url }}" style="max-height:120px;"></div>{% endif %}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Technologies</label>
+                {{ form.technologies }}
+                <small class="text-muted">Hold Ctrl (Cmd on Mac) to select multiple. Add new skills first from the Skills page if needed.</small>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">GitHub Link</label>
+                {{ form.github_link }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Live Demo Link</label>
+                {{ form.live_link }}
+            </div>
+            <div class="form-check mb-3">
+                {{ form.featured }}
+                <label class="form-check-label">Featured (show on home page)</label>
+            </div>
+            <button type="submit" class="btn btn-accent">Save Project</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Cancel</a>
+        </form>
+    </div>
+</section>
+{% endblock %}

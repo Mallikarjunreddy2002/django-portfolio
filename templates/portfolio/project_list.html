@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<section>
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+
+        <form method="get" class="row g-2 mb-4">
+            <div class="col-md-6">
+                <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search projects...">
+            </div>
+            <div class="col-md-4">
+                <select name="tech" class="form-select">
+                    <option value="">All technologies</option>
+                    {% for s in all_skills %}
+                    <option value="{{ s.id }}" {% if tech_filter == s.id|stringformat:"s" %}selected{% endif %}>{{ s.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-accent w-100">Filter</button>
+            </div>
+        </form>
+
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    {% if project.image %}
+                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.title }}</h5>
+                        <p class="card-text text-muted">{{ project.short_description }}</p>
+                        <div class="mb-2">
+                            {% for tech in project.technologies.all %}
+                            <span class="badge badge-tech">{{ tech.name }}</span>
+                            {% endfor %}
+                        </div>
+                        <a href="{% url 'project_detail' project.slug %}" class="btn btn-sm btn-accent">Details</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">No projects found.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
