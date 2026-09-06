@@ -10,16 +10,22 @@ from .forms import ContactForm, ProjectForm, SkillForm, ProfileForm
 
 
 def home(request):
-    profile = Profile.objects.first()
+    profile = None
+
+    if request.user.is_authenticated:
+        profile = Profile.objects.filter(user=request.user).first()
+
     featured_projects = Project.objects.filter(featured=True)[:6]
     skills = Skill.objects.all()[:12]
     testimonials = Testimonial.objects.all()[:6]
+
     context = {
         'profile': profile,
         'featured_projects': featured_projects,
         'skills': skills,
         'testimonials': testimonials,
     }
+
     return render(request, 'portfolio/home.html', context)
 
 
