@@ -1,87 +1,262 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block content %}
 
+<!-- =========================
+     HERO SECTION
+========================= -->
 <section class="hero text-center">
     <div class="container">
-        {% if profile.photo %}
-        <img src="{{ profile.photo.url }}" class="profile-photo mb-4" alt="{{ profile.full_name }}">
+
+        <!-- Profile Photo -->
+        {% if profile and profile.photo %}
+            <img
+                src="{{ profile.photo.url }}"
+                class="profile-photo mb-4"
+                alt="{{ profile.full_name|default:'Profile Photo' }}"
+            >
         {% endif %}
-        <h1 class="display-5 fw-bold">{{ profile.full_name|default:"Your Name" }}</h1>
-        <p class="tagline fs-4">{{ profile.tagline|default:"Add your tagline from the dashboard/admin" }}</p>
-        <p class="col-lg-7 mx-auto text-light">{{ profile.bio|default:"Write a short bio about yourself in the dashboard." }}</p>
+
+        <!-- Portfolio Title -->
+        <h1 class="display-5 fw-bold">Portfolio</h1>
+
+        <!-- Profile Name -->
+        {% if profile and profile.full_name %}
+            <h2 class="fw-bold mt-2">
+                {{ profile.full_name }}
+            </h2>
+        {% endif %}
+
+        <!-- Tagline -->
+        {% if profile and profile.tagline %}
+            <p class="tagline fs-4">
+                {{ profile.tagline }}
+            </p>
+        {% else %}
+            <p class="tagline fs-4">
+                Welcome to my portfolio
+            </p>
+        {% endif %}
+
+        <!-- Bio -->
+        {% if profile and profile.bio %}
+            <p class="col-lg-7 mx-auto text-light">
+                {{ profile.bio }}
+            </p>
+        {% else %}
+            <p class="col-lg-7 mx-auto text-light">
+                Welcome to my portfolio. Explore my projects, skills and experience.
+            </p>
+        {% endif %}
+
+        <!-- Buttons -->
         <div class="mt-4">
-            <a href="{% url 'project_list' %}" class="btn btn-accent btn-lg me-2">View My Work</a>
-            <a href="{% url 'contact' %}" class="btn btn-outline-light btn-lg">Contact Me</a>
-            {% if profile.resume %}
-            <a href="{{ profile.resume.url }}" class="btn btn-outline-light btn-lg" download>Download Resume</a>
+
+            <a
+                href="{% url 'project_list' %}"
+                class="btn btn-accent btn-lg me-2"
+            >
+                View My Work
+            </a>
+
+            <a
+                href="{% url 'contact' %}"
+                class="btn btn-outline-light btn-lg"
+            >
+                Contact Me
+            </a>
+
+            <!-- Resume -->
+            {% if profile and profile.resume %}
+                <a
+                    href="{{ profile.resume.url }}"
+                    class="btn btn-outline-light btn-lg"
+                    download
+                >
+                    Download Resume
+                </a>
             {% endif %}
+
         </div>
+
     </div>
 </section>
 
+
+<!-- =========================
+     FEATURED PROJECTS
+========================= -->
 <section>
     <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
+
+        <h2 class="section-title">
+            Featured Projects
+        </h2>
+
         <div class="row g-4">
+
             {% for project in featured_projects %}
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    {% if project.image %}
-                    <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title">{{ project.title }}</h5>
-                        <p class="card-text text-muted">{{ project.short_description }}</p>
-                        <a href="{% url 'project_detail' project.slug %}" class="btn btn-sm btn-accent">Details</a>
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="card h-100">
+
+                        {% if project.image %}
+                            <img
+                                src="{{ project.image.url }}"
+                                class="card-img-top"
+                                alt="{{ project.title }}"
+                            >
+                        {% endif %}
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                {{ project.title }}
+                            </h5>
+
+                            <p class="card-text text-muted">
+                                {{ project.short_description }}
+                            </p>
+
+                            <a
+                                href="{% url 'project_detail' project.slug %}"
+                                class="btn btn-sm btn-accent"
+                            >
+                                Details
+                            </a>
+
+                        </div>
+
                     </div>
+
                 </div>
-            </div>
+
             {% empty %}
-            <p class="text-muted">No featured projects yet — add some from the Dashboard or Admin panel.</p>
+
+                <div class="col-12">
+                    <p class="text-muted">
+                        No featured projects yet — add some from the Dashboard or Admin panel.
+                    </p>
+                </div>
+
             {% endfor %}
+
         </div>
+
     </div>
 </section>
 
+
+<!-- =========================
+     SKILLS
+========================= -->
 <section class="bg-white">
+
     <div class="container">
-        <h2 class="section-title">Skills</h2>
+
+        <h2 class="section-title">
+            Skills
+        </h2>
+
         <div class="row g-4">
+
             {% for skill in skills %}
-            <div class="col-md-6">
-                <div class="d-flex justify-content-between">
-                    <span>{% if skill.icon_class %}<i class="bi {{ skill.icon_class }} me-1"></i>{% endif %}{{ skill.name }}</span>
-                    <span>{{ skill.proficiency }}%</span>
+
+                <div class="col-md-6">
+
+                    <div class="d-flex justify-content-between">
+
+                        <span>
+                            {% if skill.icon_class %}
+                                <i class="bi {{ skill.icon_class }} me-1"></i>
+                            {% endif %}
+
+                            {{ skill.name }}
+                        </span>
+
+                        <span>
+                            {{ skill.proficiency }}%
+                        </span>
+
+                    </div>
+
+                    <div class="skill-bar mb-3">
+
+                        <div
+                            class="skill-bar-fill"
+                            style="width: {{ skill.proficiency }}%;"
+                        ></div>
+
+                    </div>
+
                 </div>
-                <div class="skill-bar mb-3">
-                    <div class="skill-bar-fill" style="width: {{ skill.proficiency }}%;"></div>
-                </div>
-            </div>
+
             {% empty %}
-            <p class="text-muted">No skills added yet — add some from the Dashboard or Admin panel.</p>
+
+                <div class="col-12">
+                    <p class="text-muted">
+                        No skills added yet — add some from the Dashboard or Admin panel.
+                    </p>
+                </div>
+
             {% endfor %}
+
         </div>
+
     </div>
+
 </section>
 
+
+<!-- =========================
+     TESTIMONIALS
+========================= -->
 {% if testimonials %}
+
 <section>
+
     <div class="container">
-        <h2 class="section-title">Testimonials</h2>
+
+        <h2 class="section-title">
+            Testimonials
+        </h2>
+
         <div class="row g-4">
+
             {% for t in testimonials %}
-            <div class="col-md-4">
-                <div class="card p-3">
-                    <p class="fst-italic">"{{ t.message }}"</p>
-                    <p class="fw-bold mb-0">{{ t.name }}</p>
-                    <small class="text-muted">{{ t.designation }}</small>
+
+                <div class="col-md-4">
+
+                    <div class="card p-3 h-100">
+
+                        <p class="fst-italic">
+                            "{{ t.message }}"
+                        </p>
+
+                        <p class="fw-bold mb-0">
+                            {{ t.name }}
+                        </p>
+
+                        {% if t.designation %}
+                            <small class="text-muted">
+                                {{ t.designation }}
+                            </small>
+                        {% endif %}
+
+                    </div>
+
                 </div>
-            </div>
+
             {% endfor %}
+
         </div>
+
     </div>
+
 </section>
+
 {% endif %}
 
 {% endblock %}
