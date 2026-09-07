@@ -62,12 +62,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 import dj_database_url
 
@@ -111,5 +105,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 # Email settings (console backend by default — prints emails to terminal).
 # Switch to SMTP backend and fill in real credentials for production use.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 DEFAULT_FROM_EMAIL = 'portfolio@example.com'
-CONTACT_RECEIVER_EMAIL = os.environ.get('CONTACT_RECEIVER_EMAIL', 'you@example.com')
+
+CONTACT_RECEIVER_EMAIL = os.environ.get(
+    'CONTACT_RECEIVER_EMAIL',
+    'mnarasaraddi232002@gmail.com'
+)

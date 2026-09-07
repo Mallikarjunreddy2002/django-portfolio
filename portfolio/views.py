@@ -28,12 +28,18 @@ def home(request):
 
     return render(request, 'portfolio/home.html', context)
 
-
 def about(request):
-    profile = Profile.objects.first()
-    skills = Skill.objects.all()
-    return render(request, 'portfolio/about.html', {'profile': profile, 'skills': skills})
+    profile = None
 
+    if request.user.is_authenticated:
+        profile = Profile.objects.filter(user=request.user).first()
+
+    skills = Skill.objects.all()
+
+    return render(request, 'portfolio/about.html', {
+        'profile': profile,
+        'skills': skills,   
+    })
 
 def project_list(request):
     projects = Project.objects.all()
