@@ -215,86 +215,70 @@
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
-    <footer class="text-center py-4 mt-5">
+ <!-- ================= FOOTER ================= -->
+<footer class="text-center py-4 mt-5">
 
-        <div class="container">
+    <div class="container">
 
-            <!-- Social Links -->
-            <div class="mb-2">
+        <!-- Social Links -->
+        <div class="mb-3">
+
+            {% if site_profile %}
 
                 {% if site_profile.github_url %}
-
-                    <a
-                        href="{{ site_profile.github_url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-light mx-2"
-                    >
+                    <a href="{{ site_profile.github_url }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="text-light mx-2"
+                       aria-label="GitHub">
                         <i class="bi bi-github fs-5"></i>
                     </a>
-
                 {% endif %}
-
 
                 {% if site_profile.linkedin_url %}
-
-                    <a
-                        href="{{ site_profile.linkedin_url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-light mx-2"
-                    >
+                    <a href="{{ site_profile.linkedin_url }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="text-light mx-2"
+                       aria-label="LinkedIn">
                         <i class="bi bi-linkedin fs-5"></i>
                     </a>
-
                 {% endif %}
-
 
                 {% if site_profile.twitter_url %}
-
-                    <a
-                        href="{{ site_profile.twitter_url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-light mx-2"
-                    >
+                    <a href="{{ site_profile.twitter_url }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="text-light mx-2"
+                       aria-label="Twitter / X">
                         <i class="bi bi-twitter-x fs-5"></i>
                     </a>
-
                 {% endif %}
-
 
                 {% if site_profile.instagram_url %}
-
-                    <a
-                        href="{{ site_profile.instagram_url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-light mx-2"
-                    >
+                    <a href="{{ site_profile.instagram_url }}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="text-light mx-2"
+                       aria-label="Instagram">
                         <i class="bi bi-instagram fs-5"></i>
                     </a>
-
                 {% endif %}
 
-            </div>
-
-
-            <!-- Copyright -->
-            <small>
-
-                &copy; {% now "Y" %}
-
-                {{ site_profile.full_name|default:"My Portfolio" }}.
-
-                Built with Django.
-
-            </small>
+            {% endif %}
 
         </div>
 
-    </footer>
+        <!-- Copyright -->
+        <small class="text-light">
+            &copy; {% now "Y" %}
+            {{ site_profile.full_name|default:"Portfolio" }}.
+            Built with Django.
+        </small>
+
+    </div>
+
+</footer>
 
 
     <!-- Bootstrap JavaScript -->

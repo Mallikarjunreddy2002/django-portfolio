@@ -7,14 +7,18 @@
 <section class="hero text-center">
     <div class="container">
 
-        <!-- Profile Photo -->
-        {% if profile and profile.photo %}
-            <img
-                src="{{ profile.photo.url }}"
-                class="profile-photo mb-4"
-                alt="{{ profile.full_name|default:'Profile Photo' }}"
-            >
-        {% endif %}
+ <!-- Profile Photo -->
+{% if profile and profile.photo %}
+    <img
+        src="{{ profile.photo.url }}"
+        class="profile-photo mb-4"
+        alt="{{ profile.full_name|default:'Profile Photo' }}"
+    >
+{% else %}
+    <div class="profile-placeholder mb-4">
+        <i class="bi bi-person-circle"></i>
+    </div>
+{% endif %}
 
         <!-- Profile Name -->
         <h1 class="display-5 fw-bold">
