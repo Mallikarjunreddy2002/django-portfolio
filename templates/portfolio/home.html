@@ -3,9 +3,7 @@
 
 {% block content %}
 
-<!-- =========================
-     HERO SECTION
-========================= -->
+<!-- ================= HERO SECTION ================= -->
 <section class="hero text-center">
     <div class="container">
 
@@ -18,62 +16,38 @@
             >
         {% endif %}
 
-        <!-- Portfolio Title -->
-        <h1 class="display-5 fw-bold">Portfolio</h1>
-
         <!-- Profile Name -->
-        {% if profile and profile.full_name %}
-            <h2 class="fw-bold mt-2">
-                {{ profile.full_name }}
-            </h2>
-        {% endif %}
+        <h1 class="display-5 fw-bold">
+            {{ profile.full_name|default:"Your Name" }}
+        </h1>
 
         <!-- Tagline -->
-        {% if profile and profile.tagline %}
-            <p class="tagline fs-4">
-                {{ profile.tagline }}
-            </p>
-        {% else %}
-            <p class="tagline fs-4">
-                Welcome to my portfolio
-            </p>
-        {% endif %}
+        <p class="tagline fs-4">
+            {{ profile.tagline|default:"Add your tagline from the dashboard/admin" }}
+        </p>
 
         <!-- Bio -->
-        {% if profile and profile.bio %}
-            <p class="col-lg-7 mx-auto text-light">
-                {{ profile.bio }}
-            </p>
-        {% else %}
-            <p class="col-lg-7 mx-auto text-light">
-                Welcome to my portfolio. Explore my projects, skills and experience.
-            </p>
-        {% endif %}
+        <p class="col-lg-7 mx-auto text-light">
+            {{ profile.bio|default:"Write a short bio about yourself in the dashboard." }}
+        </p>
 
         <!-- Buttons -->
         <div class="mt-4">
 
-            <a
-                href="{% url 'project_list' %}"
-                class="btn btn-accent btn-lg me-2"
-            >
+            <a href="{% url 'project_list' %}"
+               class="btn btn-accent btn-lg me-2">
                 View My Work
             </a>
 
-            <a
-                href="{% url 'contact' %}"
-                class="btn btn-outline-light btn-lg"
-            >
+            <a href="{% url 'contact' %}"
+               class="btn btn-outline-light btn-lg">
                 Contact Me
             </a>
 
-            <!-- Resume -->
             {% if profile and profile.resume %}
-                <a
-                    href="{{ profile.resume.url }}"
-                    class="btn btn-outline-light btn-lg"
-                    download
-                >
+                <a href="{{ profile.resume.url }}"
+                   class="btn btn-outline-light btn-lg"
+                   download>
                     Download Resume
                 </a>
             {% endif %}
@@ -84,9 +58,7 @@
 </section>
 
 
-<!-- =========================
-     FEATURED PROJECTS
-========================= -->
+<!-- ================= FEATURED PROJECTS ================= -->
 <section>
     <div class="container">
 
@@ -100,7 +72,7 @@
 
                 <div class="col-md-6 col-lg-4">
 
-                    <div class="card h-100">
+                    <div class="card">
 
                         {% if project.image %}
                             <img
@@ -120,10 +92,8 @@
                                 {{ project.short_description }}
                             </p>
 
-                            <a
-                                href="{% url 'project_detail' project.slug %}"
-                                class="btn btn-sm btn-accent"
-                            >
+                            <a href="{% url 'project_detail' project.slug %}"
+                               class="btn btn-sm btn-accent">
                                 Details
                             </a>
 
@@ -135,11 +105,9 @@
 
             {% empty %}
 
-                <div class="col-12">
-                    <p class="text-muted">
-                        No featured projects yet — add some from the Dashboard or Admin panel.
-                    </p>
-                </div>
+                <p class="text-muted">
+                    No featured projects yet — add some from the Dashboard or Admin panel.
+                </p>
 
             {% endfor %}
 
@@ -149,9 +117,7 @@
 </section>
 
 
-<!-- =========================
-     SKILLS
-========================= -->
+<!-- ================= SKILLS ================= -->
 <section class="bg-white">
 
     <div class="container">
@@ -186,8 +152,8 @@
 
                         <div
                             class="skill-bar-fill"
-                            style="width: {{ skill.proficiency }}%;"
-                        ></div>
+                            style="width: {{ skill.proficiency }}%;">
+                        </div>
 
                     </div>
 
@@ -195,11 +161,9 @@
 
             {% empty %}
 
-                <div class="col-12">
-                    <p class="text-muted">
-                        No skills added yet — add some from the Dashboard or Admin panel.
-                    </p>
-                </div>
+                <p class="text-muted">
+                    No skills added yet — add some from the Dashboard or Admin panel.
+                </p>
 
             {% endfor %}
 
@@ -210,9 +174,7 @@
 </section>
 
 
-<!-- =========================
-     TESTIMONIALS
-========================= -->
+<!-- ================= TESTIMONIALS ================= -->
 {% if testimonials %}
 
 <section>
@@ -229,7 +191,7 @@
 
                 <div class="col-md-4">
 
-                    <div class="card p-3 h-100">
+                    <div class="card p-3">
 
                         <p class="fst-italic">
                             "{{ t.message }}"
@@ -239,11 +201,9 @@
                             {{ t.name }}
                         </p>
 
-                        {% if t.designation %}
-                            <small class="text-muted">
-                                {{ t.designation }}
-                            </small>
-                        {% endif %}
+                        <small class="text-muted">
+                            {{ t.designation }}
+                        </small>
 
                     </div>
 
